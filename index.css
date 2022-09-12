@@ -1,0 +1,162 @@
+body{
+    background-size: cover;
+    min-height: 100%;
+    margin: 30px;
+    width: 100%;
+}
+
+.logo-heading {
+    display: flex;
+    justify-content:flex-end;
+    align-items: flex-end;
+}
+
+.logoHeadingFont {
+    color:#00B1FC; 
+    opacity: 0.7;
+    font-weight: 300;
+}
+
+header {
+    max-width: 95%;
+}
+
+.logo {
+    width: 250px;
+    height: 65px;
+    justify-content: center;
+}
+
+.bioPic-header{
+    height: 100px;
+    width: 100px;
+}
+
+hr {
+    padding: 10px 0 0 0;
+    margin: 20px;
+    max-width: 95%;
+}
+
+nav.navbar {
+	position: fixed;
+	left: 0;
+	width: 350px;
+	bottom: 0;
+	top: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	display: block;
+	border-right: 1px solid #cecece;
+}
+
+li {
+    padding-left: 20px;
+    list-style-type: none;
+    font-size: 20px;
+}
+
+li a {
+    text-decoration: none;
+    color: black;
+}
+
+h4 {
+    padding-left: 20px;
+    margin-top: 40px;
+}
+
+.mainContent {
+    min-width: 1430px;
+    min-height: 700px;
+    margin-left: 100px;
+}
+
+.searchBar {
+    min-width: 1430px;
+    min-height: 200px;
+}
+
+#alphaSearch {
+    min-width: 1430px;
+    min-height: 100px;
+}
+
+label {
+    font-size: 18px;
+}
+
+.fontAwesome {
+    font-family: 'Helvetica', FontAwesome, sans-serif;
+    font-size: 20px;
+    justify-content: center;
+    padding-left: 10px;
+    margin-left: 10px;
+    height: 48px;
+    width: 350px;
+}
+
+#filterBy {
+    height: 48px;
+    width: 200px;
+    padding-left: 10px;
+    margin-left: 20px;
+}
+
+.clearButton {
+    background-color: #69BA00;
+    font-size: 18px;
+    margin-left: 30px;
+    margin-right: 70px;
+    border: none;
+    height: 48px;
+    width: 120px;
+}
+
+.note {
+    min-height: 30px;
+}
+
+.profileListDiv {
+    padding: 30px;
+    border: 1px solid black;
+    min-width: 1430px;
+    min-height: 400px;
+}
+
+.myBtn {
+    height: 48px;
+    width: 50px;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 2px;
+    cursor: pointer;
+    background-color: #00B1FC;
+  }
+
+.header-layout {
+    justify-content: baseline;
+    font-weight: 300;
+}
+
+#addEmployee {
+    min-height: 48px;
+    min-width: 200px;
+    border: none;
+    background-color: #00B1FC;
+    color: white;
+    font-size: 20px;
+    margin-left: 350px;
+}
+
+.selectFilter {
+    min-height: 48px;
+    min-width: 200px;
+    padding: 10px;
+    font-weight: 500;
+}
