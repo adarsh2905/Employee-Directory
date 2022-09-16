@@ -8,12 +8,12 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
-    <!-- JS-->>
+    <!-- JS-->
     <script src="https://kit.fontawesome.com/fbe5281d41.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class>
-        <div class = "row">
+        <div class = "row justify-content-between">
             <div class = "col-6 d-flex">
                 <div><img src="images/saketa-logo.png" alt="Saketa Logo" class = "logo"></div>
                 <div>
@@ -21,7 +21,7 @@
                     <p style="font-size: 20px;">The Ultimate People Directory Experience</p>
                 </div>
             </div>
-            <div class = "col-6 d-flex logo-heading">
+            <div class = "col-6 logo-heading d-flex">
                 <h1 class = "header-layout"><span class = "logoHeadingFont">Welcome,</span> Adarsh Kumar</h1>
                 <img src="images/myPic.jpg" alt="My pic" class="bioPic-header">
             </div>
@@ -33,20 +33,20 @@
             <div class = "wrapper">
                 <nav id = "navbar">
                     <h4>Departments</h6>
-                    <li><a href="">IT</a></li>
-                    <li><a href="">Human Resources</a></li>
-                    <li><a href="">MD</a></li>
-                    <li><a href="">UX</a></li>
-                    <li><a href="">Sales</a></li>
+                    <li><a href="" class = "pointerStyle">IT</a></li>
+                    <li><a href="" class = "pointerStyle">Human Resources</a></li>
+                    <li><a href="" class = "pointerStyle">MD</a></li>
+                    <li><a href="" class = "pointerStyle">UX</a></li>
+                    <li><a href="" class = "pointerStyle">Sales</a></li>
                     <h4>Offices</h6>
-                    <li><a href="">India</a></li>
-                    <li><a href="">Seattle</a></li>
+                    <li><a href="" value = "" class = "pointerStyle">India</a></li>
+                    <li><a href="" class = "pointerStyle">Seattle</a></li>
                     <h4>Job Titles</h6>
-                    <li><a href="">SharePoint Pratice Head</a></li>
-                    <li><a href="">.NET Development Lead</a></li>
-                    <li><a href="">Recruiting Expert</a></li>
-                    <li><a href="">BI Developer</a></li>
-                    <li><a href="">Business Analyst</a></li>
+                    <li><a href="" class = "pointerStyle">SharePoint Pratice Head</a></li>
+                    <li><a href="" class = "pointerStyle">.NET Development Lead</a></li>
+                    <li><a href="" class = "pointerStyle">Recruiting Expert</a></li>
+                    <li><a href="" class = "pointerStyle">BI Developer</a></li>
+                    <li><a href="" class = "pointerStyle">Business Analyst</a></li>
                 </nav>
             </div>
             <div class = "mainContent">
@@ -55,7 +55,7 @@
                     <div class="d-flex">
                         <div>
                             <label for="search">Search</label>
-                            <input type="search" placeholder = "&#x1F50D  Enter any keyword" class = "fontAwesome">
+                            <input type="search" placeholder = "&#x1F50D  Enter any keyword" id = "search-input" class = "fontAwesome">
                             <button type = "reset" value = "submit" class = "clearButton">Clear</button>
                             <label for="filter">Filter by</label>
                             <select name="filterBy" id="filter" class = "custom-select selectFilter">
@@ -67,40 +67,43 @@
                                 <option value="office">Office</option>
                                 <option value="department">Department</option>
                             </select>
-                            <button id = "addEmployee" class = "float-right">Add Employee</button>
+                            <button id = "addEmployee" class = "float-right popup">Add Employee</button>
                         </div>
-                        <div></div>
-                        <div></div>
                     </div>
                 </div>
                 <div class = "note">Note: Please use the advance filter options to refine your results.</div>
-                <div class = "profileListDiv"></div>
+                <div class = "container vertical-scrollable profileListDiv">
+                    <div class="row" id="displayFilteredList" ></div>
+                </div>
             </div>
         </div>
     </main>
 
-    <form action="" id="addNewEmployee">
+    <form action="" id="addNewEmployee" class = "was-validated popuptext">
         <label for="fname" class="form-label">First Name:</label><br>
-        <input type="text" id="fname" class="form-control formData" name="fname" required><br>
+        <input type="text" id="fname" class="form-control formData" name="fname" required>
+        <div class="invalid-feedback">Please enter your first name.</div><br>
         <label for="lname" class="form-label">Last Name:</label><br>
-        <input type="text" id="lname" class="form-control formData" name="lname" required><br>
+        <input type="text" id="lname" class="form-control formData" name="lname" required>
+        <div class="invalid-feedback">Please enter your last name.</div><br>
         <label for="pname" class="form-label">Preferred Name:</label><br>
         <input type="text" id="pname" class="form-control formData" name="pname"><br>
         <label for="email" class="form-label">Email:</label><br>
-        <input type="email" id="email" class="form-control formData" name="mailId" required><br>
+        <input type="email" id="email" class="form-control formData" name="mailId" required>
+        <div class="invalid-feedback">Please enter your email.</div><br>
         <label for="jobTitle" class="form-label">Job Title</label><br>
         <select name="jobTitle" class="form-select formData" id="jobTitle" required>
-            <option value="leadEngineer">.NET Development Lead</option>
-            <option value="practiceHead">SharePoint Practice Head</option>
-            <option value="recruitExpert">Recruiting Expert</option>
-            <option value="BIdeveloper">BI Developer</option>
-            <option value="analyst">Business Analyst</option>
-            <option value="operations">Operations Manager</option>
-            <option value="product">Product Manager</option>
-            <option value="network">Network Engineer</option>
-            <option value="talentMagnet">Talent Magnet Jr.</option>
-            <option value="software">Software Engineer</option>
-            <option value="designer">UI Designer</option>
+            <option value="Lead Engineer - Dot Net">.NET Development Lead</option>
+            <option value="Practice Head">SharePoint Practice Head</option>
+            <option value="Recruiting Expert">Recruiting Expert</option>
+            <option value="BI Developer">BI Developer</option>
+            <option value="Analyst">Business Analyst</option>
+            <option value="Operations Manager">Operations Manager</option>
+            <option value="Product Manager">Product Manager</option>
+            <option value="Network Engineer">Network Engineer</option>
+            <option value="Talent Magnet Jr.">Talent Magnet Jr.</option>
+            <option value="Software Engineer">Software Engineer</option>
+            <option value="UX Designer">UI Designer</option>
         </select><br>
         <label for="office" class="form-label">Office</label><br>
         <select name="office" class="form-select formData" id="office" required>
@@ -116,12 +119,32 @@
             <option value="UX">UX</option>
         </select><br>
         <label for="telephone" class="form-label">Phone Number</label><br>
-        <input type="tel" id = "telephone" class="form-control formData" name="telphone" pattern="[0-9]{10}" maxlength="12"  title="Ten digits code" required/><br>
+        <input type="tel" id = "telephone" class="form-control formData" name="telphone" pattern="[0-9]{10}" maxlength="12"  title="Ten digits code" required/>
+        <div class="invalid-feedback">Please enter your phone/mobile number in valid format.</div><br>
         <label for="skype" class="form-label">Skype ID</label><br>
-        <input type="number" id="skype" class="form-control formData" name="skypeId" required><br>
-        <input class="btn btn-primary" type="submit" id = "submit" value="Submit">
+        <input type="number" id="skype" class="form-control formData" name="skypeId" required>
+        <div class="invalid-feedback">Please enter your skype id.</div><br>
+        <label for="image" class="form-label">Upload your picture</label><br>
+        <input type="file" name="Image" class="form-control formData" accept="image/*" id="fileInput" required>
+        <div class="invalid-feedback">Please upload your image.</div><br><br>
+        <button class="btn btn-primary" type="submit" id = "submit" value="Submit" onclick="saveItem()">Submit</button>
         <a href="index.html" name="cancel" class="btn btn-secondary">Cancel</a>
     </form>
+
+    <div class="profilePopup">
+        <img src="images/myPic.jpg" alt="employeePic" class = "employeePic">
+        <h1>Adarsh Kumar</h1>
+        <p class="profileDescription"><strong>First Name : </strong>Adarsh</p>
+        <p class="profileDescription"><strong>Last Name : </strong>Kumar</p>
+        <p class="profileDescription"><strong>Email : </strong>adarsh.kr29@gmail.com</p>
+        <p class="profileDescription"><strong>Job Title : </strong>.NET Development Lead</p>
+        <p class="profileDescription"><strong>Office : </strong>India</p>
+        <p class="profileDescription"><strong>Department : </strong>IT</p>
+        <p class="profileDescription"><strong>Phone Number : </strong>8290226165</p>
+        <p class="profileDescription"><strong>Skype ID : </strong>345678</p>
+        <button class="btn btn-primary editButton" type="edit" id = "edit" value="Edit" onclick="">Edit</button>
+        <button class="btn btn-secondary deleteButton" type="delete" id = "delete" value="Delete" onclick="">Delete</button>
+    </div>
     <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script src = "index.js"></script>

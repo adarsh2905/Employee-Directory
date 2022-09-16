@@ -118,9 +118,9 @@ label {
 }
 
 .profileListDiv {
-    padding: 30px;
-    border: 1px solid black;
-    min-width: 1430px;
+    padding: 5px 20px;
+    border: 1px solid #E5E5E5;
+    min-width: 1460px;
     min-height: 400px;
 }
 
@@ -160,3 +160,110 @@ label {
     padding: 10px;
     font-weight: 500;
 }
+
+.required:after {
+    content:" *";
+    color: red;
+}
+
+.flex-container-employeeList {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+#imgList {
+    display: flex;
+    min-height: 120px;
+    background-color: #E9E8E8;
+    margin: 10px 5px;
+    max-width: 350px;
+    border-radius: 5px;
+}
+
+.employeeListImage {
+    min-height: 100px;
+    max-width: 80px;
+    margin-top: 10px;
+}
+
+.insiderContent {
+    padding: 10px;
+    align-items: center;
+}
+
+p {
+    line-height: 4px;
+    font-size: 14px;
+    color: rgba(0, 0 , 0, 0.7)
+}
+
+.profilePopup {
+    min-height: 800px;
+    max-width: 400px;
+    background-color: #E8E9E8;
+    padding: 20px;
+}
+
+h5 {
+    margin-bottom: 15px;
+}
+
+.icons {
+    color: rgba(0, 0, 0, 0.7);
+    padding-right: 5px;
+}
+
+.pointerStyle {
+    cursor: default;
+    text-decoration: none;
+}
+
+.popup {
+    position: relative;
+    /* display: inline-block; */
+    cursor: pointer;
+  }
+
+  .popup .popuptext {
+    visibility: hidden;
+    text-align: center;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .employeePic {
+    min-width: 360px;
+    height: 360px;
+  }
+
+  h1 {
+    text-align: center;
+    padding: 10px 0 20px 0;
+    font-size: 44px;
+  }
+
+  .profileDescription {
+    font-size: 22px;
+    line-height: 16px;
+  }
+
+ .editButton {
+    margin-top: 10px;
+    color : white;
+    background-color: #00B1FC;
+    align-self: center;
+    font-size: 20px;
+    min-width: 80px;
+    margin-left: 70px;
+  }
+
+ .deleteButton {
+    margin-top: 10px;
+    color : white;
+    background-color: #EB118E;
+    align-self: center;
+    font-size: 20px;
+    min-width: 80px;
+    margin-left: 30px;
+ }
