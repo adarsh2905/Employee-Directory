@@ -54,18 +54,22 @@
                     <div id = "alphaSearch"></div>
                     <div class="d-flex">
                         <div>
-                            <label for="search">Search</label>
-                            <input type="search" placeholder = "&#x1F50D  Enter any keyword" id = "search-input" class = "fontAwesome">
-                            <button type = "reset" value = "submit" class = "clearButton">Clear</button>
+                            <form>
+                                <label for="search">Search</label>
+                                <input type="text" name = "search" placeholder = "&#x1F50D  Enter any keyword" id = "search-input" class = "fontAwesome" onkeyup="searchByFilterList()">
+                                <input type = "reset" value = "Clear" class = "clearButton" onclick="clearInput()">
+                            </form>
+                        </div>
+                        <div>
                             <label for="filter">Filter by</label>
                             <select name="filterBy" id="filter" class = "custom-select selectFilter">
-                                <option value="firstName">First Name</option>
-                                <option value="lastName">Last Name</option>
-                                <option value="preferredName">Preferred Name</option>
-                                <option value="email">Email</option>
-                                <option value="jobTitle">Job Title</option>
-                                <option value="office">Office</option>
-                                <option value="department">Department</option>
+                                <option value="FirstName">First Name</option>
+                                <option value="LastName">Last Name</option>
+                                <option value="PreferredName">Preferred Name</option>
+                                <option value="Email">Email</option>
+                                <option value="JobTitle">Job Title</option>
+                                <option value="Office">Office</option>
+                                <option value="Department">Department</option>
                             </select>
                             <button id = "addEmployee" class = "float-right popup">Add Employee</button>
                         </div>

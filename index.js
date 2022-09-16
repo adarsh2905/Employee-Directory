@@ -189,21 +189,60 @@ function alphaFilter(letter) {
 
 
 //function to search employee using search bar
-function  filterList() {
-    const searchInput = document.querySelector('#search-input');
-    const filter = searchInput.value.toLowerCase();
+function searchByFilterList() {
+    var searchInput = document.getElementById('search-input').value;
+    const filterValue = document.querySelector('#filter').value;
+    const filter = searchInput.toLowerCase();
     const listItems = getEmployees();
-
+    var employeeListByFilter = [];
     listItems.forEach((item) =>{
-        let text = item.textContent;
-        if(text.toLowerCase().includes(filter)){
-            item.style.display = '';
-        } else {
-            item.style.display = 'none';
+        if(filterValue === 'FirstName'){
+            let text = item.FirstName.toLowerCase();
+            console.log(text, filter);
+            if(text.includes(filter)){
+                employeeListByFilter.push(item);
+            }
+        } else if(filterValue === 'LastName'){
+            let text = item.LastName.toLowerCase();
+            const val = text.toLowerCase();
+            if(text.includes(filter)){
+                employeeListByFilter.push(item);
+            }
+        } else if(filterValue === 'PreferredName'){
+            let text = item.PreferredName.toLowerCase();
+            const val = text.toLowerCase();
+            if(text.includes(filter)){
+                employeeListByFilter.push(item);
+            }
+        } else if(filterValue === 'Email'){
+            let text = item.Email.toLowerCase();
+            const val = text.toLowerCase();
+            if(text.includes(filter)){
+                employeeListByFilter.push(item);
+            }
+        } else if(filterValue === 'JobTitle'){
+            let text = item.JobTitle.toLowerCase();
+            const val = text.toLowerCase();
+            if(text.includes(filter)){
+                employeeListByFilter.push(item);
+            }
+        } else if(filterValue === 'Office'){
+            let text = item.Office.toLowerCase();
+            const val = text.toLowerCase();
+            if(text.includes(filter)){
+                employeeListByFilter.push(item);
+            }
+        } else if(filterValue === 'Department'){
+            let text = item.Department.toLowerCase();
+            const val = text.toLowerCase();
+            if(text.includes(filter)){
+                employeeListByFilter.push(item);
+            }
         }
-    });
+        renderEmployees(employeeListByFilter);    
+    }
+    );
 }
-filterList();
 
 let emplist = getEmployees();
 renderEmployees(emplist);
@@ -213,3 +252,9 @@ function getEmployeeById(id) {
     const emp = localStorage.getItem(i);
     return emp;
 }
+
+function clearInput() {
+    // document.getElementById("search-input").reset();
+}
+
+clearInput();
