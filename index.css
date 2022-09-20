@@ -22,9 +22,11 @@ header {
 }
 
 .logo {
-    width: 250px;
-    height: 65px;
-    justify-content: center;
+    width: 300px;
+    max-height: 80px;
+    justify-content: baseline;
+    align-items: baseline;
+    margin-top: 25px;
 }
 
 .bioPic-header{
@@ -219,9 +221,13 @@ h5 {
     text-decoration: none;
 }
 
+.textColor {
+    color: #98A19F;
+}
+
 .popup {
     position: relative;
-    /* display: inline-block; */
+    display: inline-block;
     cursor: pointer;
   }
 
@@ -267,4 +273,25 @@ h5 {
     font-size: 20px;
     min-width: 80px;
     margin-left: 30px;
+ }
+
+ #collapseButton {
+    border: none;
+    outline: none;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.4s;
+    color: #00B0FD;
+    margin-left: 15px;
+    cursor: default;
+ }
+
+ .active, #collapseButton:hover {
+    text-decoration: underline;
+  }
+
+ #displayHiddenList {
+    overflow: hidden;
+    display: none;
  }

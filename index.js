@@ -1,10 +1,7 @@
 createButton();
-initializeData();
-
-
 //function to create buutons 
 function createButton() {
-    var btns = ""
+    var btns = "";
     btns += `<button class = "myBtn" title = "userButton" onclick = "getEmployees()"><i class = "fa fa-user"></i></button>`
     for(let i = 65; i < 91; i++){
         var letter = String.fromCharCode(i);
@@ -12,7 +9,6 @@ function createButton() {
     }
     document.getElementById("alphaSearch").innerHTML=btns;
 }
-
 
 //event listener to open a form by clicking on add employee button
 
@@ -30,13 +26,14 @@ const form = document.getElementById('addNewEmployee');
 
 // renderEmployees(emptyListInitialize);
 
-var newId = 0;
-var emptyListInitialize = [];
-
+let newId = 0;
+let employeeCount = [];
+initializeData();
 function initializeData() {
     if(localStorage.length === 0){
-        // localStorage.clear();
+        localStorage.clear();
         localStorage.setItem("latestId", 0);
+        let emptyListInitialize = [];
         let employee1 = new Map();
         employee1.FirstName = "Adarsh";
         employee1.LastName = "Kumar";
@@ -82,6 +79,7 @@ function initializeData() {
 
         localStorage.setItem("latestId", newId);
         for(let i = 1; i <= newId; i++){
+            employeeCount.push(emptyListInitialize[i-1].Id);
             localStorage.setItem(i, JSON.stringify(emptyListInitialize[i-1]));
         }
         renderEmployees(emptyListInitialize);
@@ -91,7 +89,7 @@ function initializeData() {
 //function to save data to local storage
 
 function saveItem(event) {
-    event.preventDefault();
+    // event.preventDefault();
     let employee= new Map();
     employee = {
         FirstName : "",
@@ -122,12 +120,12 @@ function saveItem(event) {
     employee.PhoneNumber = inputs[7].value;
     employee.SkypeId = inputs[8].value;
     employee.Id = newId++;
+    employeeCount.push(employee.Id);
     let base64String = "";
     const fileInput = document.getElementById("fileInput");
     const file = fileInput.files[0];
     const reader = new FileReader();
     reader.onload = function () {
-        // console.log(reader);
         base64String = reader.result;
         employee.Image = base64String;
         localStorage.setItem(parseInt(localStorage.getItem("latestId"))+1, JSON.stringify(employee));
@@ -139,14 +137,17 @@ function saveItem(event) {
     reader.readAsDataURL(file);
 }
 
+
+let empDetailsPopup = [];
 //function to render employees in required template
 function renderEmployees(listOfEmployees) {
     var employeeHtmlTemplate = "";
     for(let i = 0; i < listOfEmployees.length; i++){
+        empDetailsPopup.push(listOfEmployees[i].Id);
         employeeHtmlTemplate += `<div class="col-3" id = "imgList">
         <div><img src=${listOfEmployees[i].Image} alt="employee Pic" class = "employeeListImage"></div>
         <div class = "insiderContent">
-            <h5><a href="" class = "pointerStyle">${listOfEmployees[i].PreferredName}</a></h5>
+            <h5><a href="" class = "pointerStyle popup" id = "employeeDetails" onclick = "getEmployeeById('${empDetailsPopup[i]}')">${listOfEmployees[i].PreferredName}</a></h5>
             <p>${listOfEmployees[i].JobTitle}</p>
             <p>${listOfEmployees[i].Department} Department</p>
             <a href="#"><i class="fa-solid fa-phone icons"></i></a>
@@ -160,10 +161,10 @@ function renderEmployees(listOfEmployees) {
     document.getElementById("displayFilteredList").innerHTML = employeeHtmlTemplate;
 }
 
+
 //function to get employee list from local storage
 function getEmployees() {
     let allEmployeeList = [];
-    //for i to latestId (inclusive)
     for(let i = 1; i <= localStorage.getItem("latestId"); i++){
         const x = localStorage.getItem(i);
         if(x !== null){
@@ -173,6 +174,9 @@ function getEmployees() {
     renderEmployees(allEmployeeList);
     return allEmployeeList;
 }
+
+let emplist = getEmployees();
+renderEmployees(emplist);
 
 
 //function to search employee using alphabet
@@ -244,17 +248,144 @@ function searchByFilterList() {
     );
 }
 
-let emplist = getEmployees();
-renderEmployees(emplist);
-
 //function to display employee details when clicking on employee name
 function getEmployeeById(id) {
-    const emp = localStorage.getItem(i);
-    return emp;
+    let emp = JSON.parse(localStorage.getItem(id));
+    console.log(emp);
+    displayEmployeeDetails(emp);
 }
 
-function clearInput() {
-    // document.getElementById("search-input").reset();
+function displayEmployeeDetails(emp) {
+    let htmlStr = `<div class="profilePopup popuptext" id = "employeeDetails">
+        <img src="${emp.Image}" alt="employeePic" class = "employeePic">
+        <h1>${emp.PreferredName}</h1>
+        <p class="profileDescription"><strong>First Name : </strong>${emp.FirstName}</p>
+        <p class="profileDescription"><strong>Last Name : </strong>${emp.LastName}</p>
+        <p class="profileDescription"><strong>Email : </strong>${emp.Email}</p>
+        <p class="profileDescription"><strong>Job Title : </strong>${emp.JobTitle}</p>
+        <p class="profileDescription"><strong>Office : </strong>${emp.Office}</p>
+        <p class="profileDescription"><strong>Department : </strong>${emp.Department}</p>
+        <p class="profileDescription"><strong>Phone Number : </strong>${emp.PhoneNumber}</p>
+        <p class="profileDescription"><strong>Skype ID : </strong>${emp.SkypeId}</p>
+        <button class="btn btn-primary editButton" type="edit" id = "edit" value="Edit" onclick="">Edit</button>
+        <button class="btn btn-secondary deleteButton" type="delete" id = "delete" value="Delete" onclick="">Delete</button>
+    </div>`;
+    var child = document.createElement('div');
+    child.innerHTML = htmlStr;
+    child = child.firstChild;
+    document.getElementById('profileDetails').appendChild(child);
 }
 
-clearInput();
+
+countOfEmployees(emplist);
+function countOfEmployees(emplist) {
+    var deptIT = 0, deptHR = 0, deptMD = 0, deptSales = 0, deptUX =0;
+    var offIndia = 0, offSeattle = 0;
+    var jobLeadEngineer = 0, jobPracticeHead = 0, jobRecruitExpert = 0, jobBIDeveloper = 0, jobAnlayst = 0; 
+    var jobOpsManager = 0, jobProductManager = 0, jobNetworkEngineer = 0, jobTalentMagnet = 0, jobSoftwareEngineer = 0, jobUXDesigner = 0; 
+    
+    for(let i = 0; i < emplist.length; i++){
+        var empDept = emplist[i].Department;
+        var empOff = emplist[i].Office;
+        var empJob = emplist[i].JobTitle;
+
+        if (empDept === "IT"){
+            deptIT++;
+        }
+        if (empDept === "HR"){
+            deptHR++;
+        }
+        if (empDept === "MD"){
+            deptMD++;
+        }
+        if (empDept === "Sales"){
+            deptSales++;
+        }
+        if (empDept === "UX"){
+            deptUX++;
+        }
+
+        if (empOff === "India"){
+            offIndia++;
+        }
+        if (empOff === "Seattle"){
+            offSeattle++;
+        }
+
+        if (empJob === "Development Lead - Dot Net"){
+            jobLeadEngineer++;
+        }
+        if (empJob === "Practice Head"){
+            jobPracticeHead++;
+        }
+        if (empJob === "Recruiting Expert"){
+            jobRecruitExpert++;
+        }
+        if (empJob === "BI Developer"){
+            jobBIDeveloper++;
+        }
+        if (empJob === "Analyst"){
+            jobAnlayst++;
+        }
+        if (empJob === "Operations Manager"){
+            jobOpsManager++;
+        }
+        if (empJob === "Product Manager"){
+            jobProductManager++;
+        }
+        if (empJob === "Network Engineer"){
+            jobNetworkEngineer++;
+        }
+        if (empJob === "Talent Magnet Jr."){
+            jobTalentMagnet++;
+        }
+        if (empJob === "Software Engineer"){
+            jobSoftwareEngineer++;
+        }
+        if (empJob === "UX Designer"){
+            jobUXDesigner++;
+        }
+    }
+
+    var navBar = "";
+    navBar = `<nav>
+        <h4>Departments</h4>
+            <li><a href="" class = "pointerStyle textColor">IT (${deptIT})</a></li>
+            <li><a href="" class = "pointerStyle textColor">Human Resources (${deptHR})</a></li>
+            <li><a href="" class = "pointerStyle textColor">MD (${deptMD})</a></li>
+            <li><a href="" class = "pointerStyle textColor">UX (${deptUX})</a></li>
+            <li><a href="" class = "pointerStyle textColor">Sales (${deptSales})</a></li>
+        <h4>Offices</h4>
+            <li><a href="" value = "" class = "pointerStyle textColor">India (${offIndia})</a></li>
+            <li><a href="" class = "pointerStyle textColor">Seattle(${offSeattle})</a></li>
+        <h4>Job Titles</h4>
+            <li><a href="" class = "pointerStyle textColor">SharePoint Pratice Head (${jobPracticeHead})</a></li>
+            <li><a href="" class = "pointerStyle textColor">.NET Development Lead (${jobLeadEngineer})</a></li>
+            <li><a href="" class = "pointerStyle textColor">Recruiting Expert (${jobRecruitExpert})</a></li>
+            <li><a href="" class = "pointerStyle textColor">BI Developer (${jobBIDeveloper})</a></li>
+            <li><a href="" class = "pointerStyle textColor">Business Analyst (${jobAnlayst})</a></li>
+            <button id = "collapseButton" type = "button" onclick = "changeName()">view more</button>
+            <div id = "displayHiddenList">
+            <li><a href="" class = "pointerStyle textColor">Operations manager (${jobOpsManager})</a></li>
+            <li><a href="" class = "pointerStyle textColor">Product Manager (${jobProductManager})</a></li>
+            <li><a href="" class = "pointerStyle textColor">Network Engineer (${jobNetworkEngineer})</a></li>
+            <li><a href="" class = "pointerStyle textColor">Talent Magnet Jr. (${jobTalentMagnet})</a></li>
+            <li><a href="" class = "pointerStyle textColor">Software Engineer (${jobSoftwareEngineer})</a></li>
+            <li><a href="" class = "pointerStyle textColor">UI Designer (${jobUXDesigner})</a></li>
+            </div>
+    </nav>`
+    document.getElementById("navbar").innerHTML = navBar;
+}
+
+function changeName(){
+    var buttonValue = document.getElementById("collapseButton").innerHTML;
+    var x = document.getElementById("displayHiddenList");
+
+    if(buttonValue === "view more"){
+        document.getElementById("collapseButton").innerHTML = "view less";
+        x.style.display = "block";
+    } else {
+        document.getElementById("collapseButton").innerHTML = "view more";
+        x.style.display = "none";
+    }
+}

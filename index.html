@@ -28,26 +28,10 @@
         </div>
     </header>
     <hr>
-    <main >
+    <main>
         <div class = "d-flex">
             <div class = "wrapper">
-                <nav id = "navbar">
-                    <h4>Departments</h6>
-                    <li><a href="" class = "pointerStyle">IT</a></li>
-                    <li><a href="" class = "pointerStyle">Human Resources</a></li>
-                    <li><a href="" class = "pointerStyle">MD</a></li>
-                    <li><a href="" class = "pointerStyle">UX</a></li>
-                    <li><a href="" class = "pointerStyle">Sales</a></li>
-                    <h4>Offices</h6>
-                    <li><a href="" value = "" class = "pointerStyle">India</a></li>
-                    <li><a href="" class = "pointerStyle">Seattle</a></li>
-                    <h4>Job Titles</h6>
-                    <li><a href="" class = "pointerStyle">SharePoint Pratice Head</a></li>
-                    <li><a href="" class = "pointerStyle">.NET Development Lead</a></li>
-                    <li><a href="" class = "pointerStyle">Recruiting Expert</a></li>
-                    <li><a href="" class = "pointerStyle">BI Developer</a></li>
-                    <li><a href="" class = "pointerStyle">Business Analyst</a></li>
-                </nav>
+                <nav id = "navbar"></nav>
             </div>
             <div class = "mainContent">
                 <div class = "searchBar">
@@ -75,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class = "note">Note: Please use the advance filter options to refine your results.</div>
+                <div class = "note">Note: <span class="textColor">Please use the advance filter options to refine your results.</span></div>
                 <div class = "container vertical-scrollable profileListDiv">
                     <div class="row" id="displayFilteredList" ></div>
                 </div>
@@ -97,7 +81,7 @@
         <div class="invalid-feedback">Please enter your email.</div><br>
         <label for="jobTitle" class="form-label">Job Title</label><br>
         <select name="jobTitle" class="form-select formData" id="jobTitle" required>
-            <option value="Lead Engineer - Dot Net">.NET Development Lead</option>
+            <option value="Development Lead - Dot Net">.NET Development Lead</option>
             <option value="Practice Head">SharePoint Practice Head</option>
             <option value="Recruiting Expert">Recruiting Expert</option>
             <option value="BI Developer">BI Developer</option>
@@ -107,12 +91,12 @@
             <option value="Network Engineer">Network Engineer</option>
             <option value="Talent Magnet Jr.">Talent Magnet Jr.</option>
             <option value="Software Engineer">Software Engineer</option>
-            <option value="UX Designer">UI Designer</option>
+            <option value="UI Designer">UI Designer</option>
         </select><br>
         <label for="office" class="form-label">Office</label><br>
         <select name="office" class="form-select formData" id="office" required>
-            <option value="india">India</option>
-            <option value="seattle">Seattle</option>
+            <option value="India">India</option>
+            <option value="Seattle">Seattle</option>
         </select><br>
         <label for="department" class="form-label">Department</label><br>
         <select name="department" class="form-select formData" id="department" required>
@@ -134,8 +118,11 @@
         <button class="btn btn-primary" type="submit" id = "submit" value="Submit" onclick="saveItem()">Submit</button>
         <a href="index.html" name="cancel" class="btn btn-secondary">Cancel</a>
     </form>
+    <div id="profileDetails">
 
-    <div class="profilePopup">
+    </div>
+
+    <!-- <div class="profilePopup">
         <img src="images/myPic.jpg" alt="employeePic" class = "employeePic">
         <h1>Adarsh Kumar</h1>
         <p class="profileDescription"><strong>First Name : </strong>Adarsh</p>
@@ -148,7 +135,7 @@
         <p class="profileDescription"><strong>Skype ID : </strong>345678</p>
         <button class="btn btn-primary editButton" type="edit" id = "edit" value="Edit" onclick="">Edit</button>
         <button class="btn btn-secondary deleteButton" type="delete" id = "delete" value="Delete" onclick="">Delete</button>
-    </div>
+    </div> -->
     <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script src = "index.js"></script>
