@@ -196,50 +196,52 @@ function alphaFilter(letter) {
 function searchByFilterList() {
     var searchInput = document.getElementById('search-input').value;
     const filterValue = document.querySelector('#filter').value;
+    const sideBarOfficeFilter = document.querySelector('#sideBarOfficeFilter').value;
     const filter = searchInput.toLowerCase();
     const listItems = getEmployees();
     var employeeListByFilter = [];
     listItems.forEach((item) =>{
         if(filterValue === 'FirstName'){
             let text = item.FirstName.toLowerCase();
-            console.log(text, filter);
             if(text.includes(filter)){
                 employeeListByFilter.push(item);
             }
         } else if(filterValue === 'LastName'){
             let text = item.LastName.toLowerCase();
-            const val = text.toLowerCase();
             if(text.includes(filter)){
                 employeeListByFilter.push(item);
             }
         } else if(filterValue === 'PreferredName'){
             let text = item.PreferredName.toLowerCase();
-            const val = text.toLowerCase();
             if(text.includes(filter)){
                 employeeListByFilter.push(item);
             }
         } else if(filterValue === 'Email'){
             let text = item.Email.toLowerCase();
-            const val = text.toLowerCase();
             if(text.includes(filter)){
                 employeeListByFilter.push(item);
             }
         } else if(filterValue === 'JobTitle'){
             let text = item.JobTitle.toLowerCase();
-            const val = text.toLowerCase();
             if(text.includes(filter)){
                 employeeListByFilter.push(item);
             }
         } else if(filterValue === 'Office'){
             let text = item.Office.toLowerCase();
-            const val = text.toLowerCase();
             if(text.includes(filter)){
                 employeeListByFilter.push(item);
             }
         } else if(filterValue === 'Department'){
             let text = item.Department.toLowerCase();
-            const val = text.toLowerCase();
             if(text.includes(filter)){
+                employeeListByFilter.push(item);
+            }
+        }
+
+        if(sideBarOfficeFilter === 'India'){
+            let text = item.Office;
+            if(text === 'India'){
+                console.log("India");
                 employeeListByFilter.push(item);
             }
         }
@@ -251,6 +253,7 @@ function searchByFilterList() {
 //function to display employee details when clicking on employee name
 function getEmployeeById(id) {
     let emp = JSON.parse(localStorage.getItem(id));
+    event.preventDefault();
     console.log(emp);
     displayEmployeeDetails(emp);
 }
@@ -350,29 +353,28 @@ function countOfEmployees(emplist) {
     var navBar = "";
     navBar = `<nav>
         <h4>Departments</h4>
-            <li><a href="" class = "pointerStyle textColor">IT (${deptIT})</a></li>
-            <li><a href="" class = "pointerStyle textColor">Human Resources (${deptHR})</a></li>
-            <li><a href="" class = "pointerStyle textColor">MD (${deptMD})</a></li>
-            <li><a href="" class = "pointerStyle textColor">UX (${deptUX})</a></li>
-            <li><a href="" class = "pointerStyle textColor">Sales (${deptSales})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">IT (${deptIT})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">Human Resources (${deptHR})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">MD (${deptMD})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">UX (${deptUX})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">Sales (${deptSales})</a></li>
         <h4>Offices</h4>
-            <li><a href="" value = "" class = "pointerStyle textColor">India (${offIndia})</a></li>
-            <li><a href="" class = "pointerStyle textColor">Seattle(${offSeattle})</a></li>
+        <li><a href="" value = "" class = "pointerStyle textColor" onclick = "">India (${offIndia})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">Seattle(${offSeattle})</a></li>
         <h4>Job Titles</h4>
-            <li><a href="" class = "pointerStyle textColor">SharePoint Pratice Head (${jobPracticeHead})</a></li>
-            <li><a href="" class = "pointerStyle textColor">.NET Development Lead (${jobLeadEngineer})</a></li>
-            <li><a href="" class = "pointerStyle textColor">Recruiting Expert (${jobRecruitExpert})</a></li>
-            <li><a href="" class = "pointerStyle textColor">BI Developer (${jobBIDeveloper})</a></li>
-            <li><a href="" class = "pointerStyle textColor">Business Analyst (${jobAnlayst})</a></li>
-            <button id = "collapseButton" type = "button" onclick = "changeName()">view more</button>
-            <div id = "displayHiddenList">
-            <li><a href="" class = "pointerStyle textColor">Operations manager (${jobOpsManager})</a></li>
-            <li><a href="" class = "pointerStyle textColor">Product Manager (${jobProductManager})</a></li>
-            <li><a href="" class = "pointerStyle textColor">Network Engineer (${jobNetworkEngineer})</a></li>
-            <li><a href="" class = "pointerStyle textColor">Talent Magnet Jr. (${jobTalentMagnet})</a></li>
-            <li><a href="" class = "pointerStyle textColor">Software Engineer (${jobSoftwareEngineer})</a></li>
-            <li><a href="" class = "pointerStyle textColor">UI Designer (${jobUXDesigner})</a></li>
-            </div>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">SharePoint Pratice Head (${jobPracticeHead})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">.NET Development Lead (${jobLeadEngineer})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">Recruiting Expert (${jobRecruitExpert})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">BI Developer (${jobBIDeveloper})</a></li>            <li><a href="" class = "pointerStyle textColor" onclick = "">Business Analyst (${jobAnlayst})</a></li>
+        <div id = "displayHiddenList">
+        <li><a href="" class = "pointerStyle textColor" onclick = "">Operations manager (${jobOpsManager})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">Product Manager (${jobProductManager})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">Network Engineer (${jobNetworkEngineer})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">Talent Magnet Jr. (${jobTalentMagnet})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">Software Engineer (${jobSoftwareEngineer})</a></li>
+        <li><a href="" class = "pointerStyle textColor" onclick = "">UI Designer (${jobUXDesigner})</a></li>
+        </div>
+        <button id = "collapseButton" type = "button" onclick = "changeName()">view more</button>
     </nav>`
     document.getElementById("navbar").innerHTML = navBar;
 }
@@ -382,10 +384,15 @@ function changeName(){
     var x = document.getElementById("displayHiddenList");
 
     if(buttonValue === "view more"){
-        document.getElementById("collapseButton").innerHTML = "view less";
         x.style.display = "block";
+        document.getElementById("collapseButton").innerHTML = "view less";
     } else {
-        document.getElementById("collapseButton").innerHTML = "view more";
         x.style.display = "none";
+        document.getElementById("collapseButton").innerHTML = "view more";
     }
+}
+
+function clearInput() {
+    getEmployees();
+    document.querySelector('#filter').value = 'FirstName';
 }
