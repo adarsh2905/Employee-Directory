@@ -10,22 +10,6 @@ function createButton() {
     document.getElementById("alphaSearch").innerHTML=btns;
 }
 
-//event listener to open a form by clicking on add employee button
-
-const btn = document.getElementById('addEmployee');
-
-btn.addEventListener('click', () => {
-const form = document.getElementById('addNewEmployee');
-
-    if (form.style.display === 'none') {
-    form.style.display = 'block';
-    } else {
-    form.style.display = 'none';
-    }
-});
-
-// renderEmployees(emptyListInitialize);
-
 let newId = 0;
 let employeeCount = [];
 initializeData();
@@ -139,17 +123,15 @@ function saveItem() {
     reader.readAsDataURL(file);
 }
 
-
-// let empDetailsPopup = [];
 //function to render employees in required template
+
 function renderEmployees(listOfEmployees) {
     var employeeHtmlTemplate = "";
     for(let i = 0; i < listOfEmployees.length; i++){
-        // empDetailsPopup.push(listOfEmployees[i].Id);
         employeeHtmlTemplate += `<div class="col-3" id = "imgList">
         <div><img src=${listOfEmployees[i].Image} alt="employee Pic" class = "employeeListImage"></div>
         <div class = "insiderContent">
-            <h5><a href="" class = "pointerStyle popup" id = "employeeDetails" onclick = "getEmployeeById('${listOfEmployees[i].Id}')">${listOfEmployees[i].PreferredName}</a></h5>
+            <h5><a href="" class = "pointerStyle popup" data-bs-toggle = "modal" data-bs-target = "#employeeDetails" onclick = "getEmployeeById('${listOfEmployees[i].Id}')">${listOfEmployees[i].PreferredName}</a></h5>
             <p>${listOfEmployees[i].JobTitle}</p>
             <p>${listOfEmployees[i].Department} Department</p>
             <a href="#"><i class="fa-solid fa-phone icons"></i></a>
@@ -165,6 +147,7 @@ function renderEmployees(listOfEmployees) {
 
 
 //function to get employee list from local storage
+
 function getEmployees() {
     let allEmployeeList = [];
     for(let i = 1; i <= localStorage.getItem("latestId"); i++){
@@ -182,6 +165,7 @@ renderEmployees(emplist);
 
 
 //function to search employee using alphabet
+
 function alphaFilter(letter) {
     var employeeList = getEmployees();
     var filteredEmployeeList = [];
@@ -195,6 +179,7 @@ function alphaFilter(letter) {
 
 
 //function to search employee using search bar
+
 function searchByFilterList() {
     var searchInput = document.getElementById('search-input').value;
     const filterValue = document.querySelector('#filter').value;
@@ -244,6 +229,7 @@ function searchByFilterList() {
 }
 
 //function to search employee using search bar
+
 function searchBySideBar(sideBarHeading, sideBarValue) {
     const listItems = getEmployees();
     var employeeListBySideBarFilter = [];
@@ -271,6 +257,7 @@ function searchBySideBar(sideBarHeading, sideBarValue) {
 }
 
 //function to display employee details when clicking on employee name
+
 function getEmployeeById(id) {
     let emp = JSON.parse(localStorage.getItem(id));
     console.log(emp);
@@ -278,25 +265,31 @@ function getEmployeeById(id) {
 }
 
 function displayEmployeeDetails(emp) {
-    let htmlStr = `<div class="profilePopup popuptext" id = "employeeDetails">
-        <img src="${emp.Image}" alt="employeePic" class = "employeePic">
-        <h1>${emp.PreferredName}</h1>
-        <p class="profileDescription"><strong>First Name : </strong>${emp.FirstName}</p>
-        <p class="profileDescription"><strong>Last Name : </strong>${emp.LastName}</p>
-        <p class="profileDescription"><strong>Email : </strong>${emp.Email}</p>
-        <p class="profileDescription"><strong>Job Title : </strong>${emp.JobTitle}</p>
-        <p class="profileDescription"><strong>Office : </strong>${emp.Office}</p>
-        <p class="profileDescription"><strong>Department : </strong>${emp.Department}</p>
-        <p class="profileDescription"><strong>Phone Number : </strong>${emp.PhoneNumber}</p>
-        <p class="profileDescription"><strong>Skype ID : </strong>${emp.SkypeId}</p>
-        <button class="btn btn-primary editButton" type="edit" id = "edit" value="Edit" onclick="">Edit</button>
-        <button class="btn btn-secondary deleteButton" type="delete" id = "delete" value="Delete" onclick="">Delete</button>
+    let htmlStr = `<div class="modal" id = "employeeDetails">
+    <div class = "modal-dialog profilePopup">
+        <div class = "profilePopupColor modal-content">
+            <div class = "modal-body">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <img src="${emp.Image}" alt="employeePic" class = "employeePic">
+                <h1>${emp.PreferredName}</h1>
+                <p class="profileDescription"><strong>First Name : </strong>${emp.FirstName}</p>
+                <p class="profileDescription"><strong>Last Name : </strong>${emp.LastName}</p>
+                <p class="profileDescription"><strong>Email : </strong>${emp.Email}</p>
+                <p class="profileDescription"><strong>Job Title : </strong>${emp.JobTitle}</p>
+                <p class="profileDescription"><strong>Office : </strong>${emp.Office}</p>
+                <p class="profileDescription"><strong>Department : </strong>${emp.Department}</p>
+                <p class="profileDescription"><strong>Phone Number : </strong>${emp.PhoneNumber}</p>
+                <p class="profileDescription"><strong>Skype ID : </strong>${emp.SkypeId}</p>
+                <button class="btn btn-primary editButton" type="button" id = "edit" value="Edit" onclick="">Edit</button>
+                <button class="btn btn-secondary deleteButton" type="button" id = "delete" value="Delete" onclick="">Delete</button>
+            </div>        
+        </div>
+    </div>
     </div>`;
     var child = document.createElement('div');
     child.innerHTML = htmlStr;
     child = child.firstChild;
     document.getElementById('profileDetails').appendChild(child);
-    event.preventDefault();
 }
 
 
@@ -416,12 +409,4 @@ function changeName(){
 function clearInput() {
     getEmployees();
     document.querySelector('#filter').value = 'FirstName';
-}
-
-// function openForm() {
-//     document.getElementById("addNewEmployee").style.display = 'block';
-// }
-
-function closeForm() {
-    document.getElementById("addNewEmployee").style.display = 'none';
 }

@@ -1,7 +1,7 @@
 body{
     position:relative;
     background-size: cover;
-    min-height: 100%;
+    height: 100%;
     margin: 30px;
     width: 100%;
 }
@@ -165,7 +165,7 @@ label {
     font-weight: 500;
 }
 
-.required:after {
+.required::after {
     content:" *";
     color: red;
 }
@@ -202,10 +202,12 @@ p {
 }
 
 .profilePopup {
-    min-height: 800px;
     max-width: 400px;
+    border-radius: 10px;
+}
+
+.profilePopupColor {
     background-color: #E8E9E8;
-    padding: 20px;
 }
 
 h5 {
@@ -222,23 +224,9 @@ h5 {
     text-decoration: none;
 }
 
-.textColor {
+ .textColor {
     color: #98A19F;
-}
-
-  #formFillUp {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: block;
-    z-index: 9;
-  }
-
-  .form-container {
-    max-width: 50%;
-    max-height: 50%;
-    background-color: white;
-  }
+ }
 
   .employeePic {
     min-width: 360px;
@@ -296,4 +284,12 @@ h5 {
  #displayHiddenList {
     overflow: hidden;
     display: none;
+ }
+
+ .formPopup {
+    min-width: 40%;
+ }
+
+ .btn-close {
+    float: right;
  }

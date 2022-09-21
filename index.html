@@ -55,7 +55,7 @@
                                 <option value="Office">Office</option>
                                 <option value="Department">Department</option>
                             </select>
-                            <button id = "addEmployee" class = "float-right">Add Employee</button>
+                            <button type="button" id = "addEmployee" class = "btn btn-primary float-right" data-bs-toggle = "modal" data-bs-target = "#formModal">Add Employee</button>
                         </div>
                     </div>
                 </div>
@@ -67,63 +67,72 @@
         </div>
     </main>
 
-    <div id = "formFillUp">
-        <form id="addNewEmployee" class = "form-container was-validated">
-            <label for="fname" class="form-label">First Name:</label><br>
-            <input type="text" id="fname" class="form-control formData" name="fname" required>
-            <div class="invalid-feedback">Please enter your first name.</div><br>
-            <label for="lname" class="form-label">Last Name:</label><br>
-            <input type="text" id="lname" class="form-control formData" name="lname" required>
-            <div class="invalid-feedback">Please enter your last name.</div><br>
-            <label for="pname" class="form-label">Preferred Name:</label><br>
-            <input type="text" id="pname" class="form-control formData" name="pname"><br>
-            <label for="email" class="form-label">Email:</label><br>
-            <input type="email" id="email" class="form-control formData" name="mailId" required>
-            <div class="invalid-feedback">Please enter your email.</div><br>
-            <label for="jobTitle" class="form-label">Job Title</label><br>
-            <select name="jobTitle" class="form-select formData" id="jobTitle" required>
-                <option value="Development Lead - Dot Net">.NET Development Lead</option>
-                <option value="Practice Head">SharePoint Practice Head</option>
-                <option value="Recruiting Expert">Recruiting Expert</option>
-                <option value="BI Developer">BI Developer</option>
-                <option value="Analyst">Business Analyst</option>
-                <option value="Operations Manager">Operations Manager</option>
-                <option value="Product Manager">Product Manager</option>
-                <option value="Network Engineer">Network Engineer</option>
-                <option value="Talent Magnet Jr.">Talent Magnet Jr.</option>
-                <option value="Software Engineer">Software Engineer</option>
-                <option value="UI Designer">UI Designer</option>
-            </select><br>
-            <label for="office" class="form-label">Office</label><br>
-            <select name="office" class="form-select formData" id="office" required>
-                <option value="India">India</option>
-                <option value="Seattle">Seattle</option>
-            </select><br>
-            <label for="department" class="form-label">Department</label><br>
-            <select name="department" class="form-select formData" id="department" required>
-                <option value="IT">IT</option>
-                <option value="HR">Human Resources</option>
-                <option value="MD">MD</option>
-                <option value="Sales">Sales</option>
-                <option value="UX">UX</option>
-            </select><br>
-            <label for="telephone" class="form-label">Phone Number</label><br>
-            <input type="tel" id = "telephone" class="form-control formData" name="telphone" pattern="[0-9]{10}" maxlength="12"  title="Ten digits code" required/>
-            <div class="invalid-feedback">Please enter your phone/mobile number in valid format.</div><br>
-            <label for="skype" class="form-label">Skype ID</label><br>
-            <input type="number" id="skype" class="form-control formData" name="skypeId" required>
-            <div class="invalid-feedback">Please enter your skype id.</div><br>
-            <label for="image" class="form-label">Upload your picture</label><br>
-            <input type="file" name="Image" class="form-control formData" accept="image/*" id="fileInput" required>
-            <div class="invalid-feedback">Please upload your image.</div><br><br>
-            <button class="btn btn-primary" type="submit" id = "submit" value="Submit" onclick="saveItem()">Submit</button>
-            <button class="btn btn-secondary" id = "closeForm" name="cancel" onclick="closeForm()">Cancel</button>
-        </form>
+    <div id = "formModal" class = "modal">
+        <div class = "formPopup modal-dialog">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                    <h1 class="modal-title">Add New Employee</h1>
+                </div>
+                <div class = "modal-body">
+                    <form class = "was-validated">
+                        <label for="fname" class="form-label">First Name:</label><br>
+                        <input type="text" id="fname" class="form-control formData" name="fname" required>
+                        <div class="invalid-feedback">Please enter your first name.</div><br>
+                        <label for="lname" class="form-label">Last Name:</label><br>
+                        <input type="text" id="lname" class="form-control formData" name="lname" required>
+                        <div class="invalid-feedback">Please enter your last name.</div><br>
+                        <label for="pname" class="form-label">Preferred Name:</label><br>
+                        <input type="text" id="pname" class="form-control formData" name="pname"><br>
+                        <label for="email" class="form-label">Email:</label><br>
+                        <input type="email" id="email" class="form-control formData" name="mailId" required>
+                        <div class="invalid-feedback">Please enter your email.</div><br>
+                        <label for="jobTitle" class="form-label">Job Title</label><br>
+                        <select name="jobTitle" class="form-select formData" id="jobTitle" required>
+                            <option value="Development Lead - Dot Net">.NET Development Lead</option>
+                            <option value="Practice Head">SharePoint Practice Head</option>
+                            <option value="Recruiting Expert">Recruiting Expert</option>
+                            <option value="BI Developer">BI Developer</option>
+                            <option value="Analyst">Business Analyst</option>
+                            <option value="Operations Manager">Operations Manager</option>
+                            <option value="Product Manager">Product Manager</option>
+                            <option value="Network Engineer">Network Engineer</option>
+                            <option value="Talent Magnet Jr.">Talent Magnet Jr.</option>
+                            <option value="Software Engineer">Software Engineer</option>
+                            <option value="UI Designer">UI Designer</option>
+                        </select><br>
+                        <label for="office" class="form-label">Office</label><br>
+                        <select name="office" class="form-select formData" id="office" required>
+                            <option value="India">India</option>
+                            <option value="Seattle">Seattle</option>
+                        </select><br>
+                        <label for="department" class="form-label">Department</label><br>
+                        <select name="department" class="form-select formData" id="department" required>
+                            <option value="IT">IT</option>
+                            <option value="HR">Human Resources</option>
+                            <option value="MD">MD</option>
+                            <option value="Sales">Sales</option>
+                            <option value="UX">UX</option>
+                        </select><br>
+                        <label for="telephone" class="form-label">Phone Number</label><br>
+                        <input type="tel" id = "telephone" class="form-control formData" name="telphone" pattern="[0-9]{10}" maxlength="12"  title="Ten digits code" required/>
+                        <div class="invalid-feedback">Please enter your phone/mobile number in valid format.</div><br>
+                        <label for="skype" class="form-label">Skype ID</label><br>
+                        <input type="number" id="skype" class="form-control formData" name="skypeId" required>
+                        <div class="invalid-feedback">Please enter your skype id.</div><br>
+                        <label for="image" class="form-label">Upload your picture</label><br>
+                        <input type="file" name="Image" class="form-control formData" accept="image/*" id="fileInput" required>
+                        <div class="invalid-feedback">Please upload your image.</div><br><br>
+                        <button class="btn btn-primary" type="submit" id = "submit" value="Submit" onclick="saveItem()">Submit</button>
+                        <button type = "button" class="btn btn-secondary" data-bs-dismiss = "modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="profileDetails"></div>
 
     <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-<script src = "index.js"></script>
-</body>
+    <script src = "index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script></body>
 </html>
