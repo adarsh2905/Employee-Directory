@@ -1,8 +1,8 @@
 createButton();
-//function to create buutons 
+//function to create buttons 
 function createButton() {
     var btns = "";
-    btns += `<button class = "myBtn" title = "userButton" onclick = "getEmployees()"><i class = "fa fa-user"></i></button>`
+    btns += `<button class = "myBtn" onclick = "getEmployees()"><i class = "fa fa-user"></i></button>`
     for(let i = 65; i < 91; i++){
         var letter = String.fromCharCode(i);
         btns += `<button class = "myBtn pointerStyle" id = "alphaButton" onclick = "alphaFilter('${letter}')">${letter}</button>`
@@ -11,7 +11,6 @@ function createButton() {
 }
 
 let newId = 0;
-let employeeCount = [];
 initializeData();
 function initializeData() {
     let currentId = 0;
@@ -59,14 +58,12 @@ function initializeData() {
         employee3.Id = ++currentId;
 
         newId = currentId;
-        console.log(newId);
         emptyListInitialize.push(employee1);
         emptyListInitialize.push(employee2);
         emptyListInitialize.push(employee3);
 
         localStorage.setItem("latestId", newId);
         for(let i = 1; i <= newId; i++){
-            employeeCount.push(emptyListInitialize[i-1].Id);
             localStorage.setItem(i, JSON.stringify(emptyListInitialize[i-1]));
         }
         renderEmployees(emptyListInitialize);
@@ -106,7 +103,6 @@ function saveItem() {
     employee.PhoneNumber = inputs[7].value;
     employee.SkypeId = inputs[8].value;
     employee.Id = parseInt(localStorage.getItem("latestId"))+1;
-    employeeCount.push(employee.Id);
     let base64String = "";
     const fileInput = document.getElementById("fileInput");
     const file = fileInput.files[0];
@@ -116,7 +112,6 @@ function saveItem() {
         employee.Image = base64String;
         localStorage.setItem(parseInt(localStorage.getItem("latestId"))+1, JSON.stringify(employee));
         const newLatestId = parseInt(localStorage.getItem("latestId"))+1;
-        employee.Id = newLatestId;
         localStorage.setItem("latestId", newLatestId);
 
     }
@@ -260,36 +255,99 @@ function searchBySideBar(sideBarHeading, sideBarValue) {
 
 function getEmployeeById(id) {
     let emp = JSON.parse(localStorage.getItem(id));
-    console.log(emp);
     displayEmployeeDetails(emp);
 }
 
+
 function displayEmployeeDetails(emp) {
-    let htmlStr = `<div class="modal" id = "employeeDetails">
-    <div class = "modal-dialog profilePopup">
-        <div class = "profilePopupColor modal-content">
-            <div class = "modal-body">
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                <img src="${emp.Image}" alt="employeePic" class = "employeePic">
-                <h1>${emp.PreferredName}</h1>
-                <p class="profileDescription"><strong>First Name : </strong>${emp.FirstName}</p>
-                <p class="profileDescription"><strong>Last Name : </strong>${emp.LastName}</p>
-                <p class="profileDescription"><strong>Email : </strong>${emp.Email}</p>
-                <p class="profileDescription"><strong>Job Title : </strong>${emp.JobTitle}</p>
-                <p class="profileDescription"><strong>Office : </strong>${emp.Office}</p>
-                <p class="profileDescription"><strong>Department : </strong>${emp.Department}</p>
-                <p class="profileDescription"><strong>Phone Number : </strong>${emp.PhoneNumber}</p>
-                <p class="profileDescription"><strong>Skype ID : </strong>${emp.SkypeId}</p>
-                <button class="btn btn-primary editButton" type="button" id = "edit" value="Edit" onclick="">Edit</button>
-                <button class="btn btn-secondary deleteButton" type="button" id = "delete" value="Delete" onclick="">Delete</button>
-            </div>        
-        </div>
-    </div>
-    </div>`;
-    var child = document.createElement('div');
-    child.innerHTML = htmlStr;
-    child = child.firstChild;
-    document.getElementById('profileDetails').appendChild(child);
+    var image = document.getElementById("employeeImage");
+    image.src = emp.Image;
+    var preferredName = document.getElementById("namePreferred");
+    preferredName.innerHTML = emp.PreferredName;
+    var firstName = document.getElementById("nameFirst");
+    firstName.innerHTML = `<strong>First Name : </strong>` + emp.FirstName;
+    var lastName = document.getElementById("nameLast");
+    lastName.innerHTML = `<strong>Last Name : </strong>` + emp.LastName;
+    var email = document.getElementById("emailId");
+    email.innerHTML = `<strong>Email : </strong>` + emp.Email;
+    var jobTitle = document.getElementById("job");
+    jobTitle.innerHTML = `<strong>Job Title : </strong>` + emp.JobTitle;
+    var office = document.getElementById("off");
+    office.innerHTML = `<strong>Office : </strong>` + emp.Office;
+    var department = document.getElementById("dept");
+    department.innerHTML = `<strong>Department : </strong>` + emp.Department;
+    var mobile = document.getElementById("cell");
+    mobile.innerHTML = `<strong>Phone Number : </strong>` + emp.PhoneNumber;
+    var skypeId = document.getElementById("idSkype");
+    skypeId.innerHTML = `<strong>Skype ID : </strong>` + emp.SkypeId;
+    document.getElementById("edit").onclick = function(ev){
+        updateEmployee(emp);
+    }
+    document.getElementById("delete").onclick = function(ev){
+        deleteEmployee(emp.Id);
+    }
+}
+
+
+function updateEmployee(emp) {
+    document.getElementById("formHeading").innerHTML = "Update Employee";
+    document.getElementById("fname").value = emp.FirstName;
+    document.getElementById("lname").value = emp.LastName;
+    document.getElementById("email").value = emp.Email;
+    document.getElementById("jobTitle").value = emp.JobTitle;
+    document.getElementById("office").value = emp.Office;
+    document.getElementById("department").value = emp.Department;
+    document.getElementById("telephone").value = emp.PhoneNumber;
+    document.getElementById("skype").value = emp.SkypeId;
+    var updateButton = document.getElementById("submit");
+    updateButton.innerHTML = "Update";
+    updateButton.onclick = function(ev){
+        setUpdatedEmployeeData(emp.Id);
+    }
+
+}
+
+function setUpdatedEmployeeData(id){
+    let employee= new Map();
+    employee = {
+        FirstName : "",
+        LastName : "",
+        PreferredName : "",
+        Email : "",
+        JobTitle : "",
+        Office : "",
+        Department : "",
+        PhoneNumber : "",
+        SkypeId : "",
+        Image: "",
+        Id: ""
+    };
+
+    var inputs = document.getElementsByClassName("formData");
+    employee.FirstName = inputs[0].value;
+    employee.LastName = inputs[1].value;
+    if(inputs[2].value === ""){
+        employee.PreferredName = `${employee.FirstName} ${employee.LastName}`;
+    } else {
+        employee.PreferredName = inputs[2].value;
+    }            
+    employee.Email = inputs[3].value;
+    employee.JobTitle = inputs[4].value;
+    employee.Office = inputs[5].value;
+    employee.Department = inputs[6].value;
+    employee.PhoneNumber = inputs[7].value;
+    employee.SkypeId = inputs[8].value;
+    employee.Id = id;
+    let base64String = "";
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = function () {
+        base64String = reader.result;
+        employee.Image = base64String;
+        localStorage.setItem(parseInt(id), JSON.stringify(employee));
+    }
+    reader.readAsDataURL(file);
 }
 
 
@@ -409,4 +467,9 @@ function changeName(){
 function clearInput() {
     getEmployees();
     document.querySelector('#filter').value = 'FirstName';
+}
+
+function deleteEmployee(id){
+    localStorage.removeItem(parseInt(id));
+    window.location.reload();
 }

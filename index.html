@@ -71,7 +71,7 @@
         <div class = "formPopup modal-dialog">
             <div class = "modal-content">
                 <div class = "modal-header">
-                    <h1 class="modal-title">Add New Employee</h1>
+                    <h1 class="modal-title" id="formHeading">Add New Employee</h1>
                 </div>
                 <div class = "modal-body">
                     <form class = "was-validated">
@@ -114,22 +114,44 @@
                             <option value="UX">UX</option>
                         </select><br>
                         <label for="telephone" class="form-label">Phone Number</label><br>
-                        <input type="tel" id = "telephone" class="form-control formData" name="telphone" pattern="[0-9]{10}" maxlength="12"  title="Ten digits code" required/>
-                        <div class="invalid-feedback">Please enter your phone/mobile number in valid format.</div><br>
+                        <input type="tel" id = "telephone" class="form-control formData" name="telephone" pattern="[0-9]{10}" maxlength="10"  title="Ten digits code" required/>
+                        <div class="invalid-feedback">Please enter your 10 digit mobile number.</div><br>
                         <label for="skype" class="form-label">Skype ID</label><br>
                         <input type="number" id="skype" class="form-control formData" name="skypeId" required>
                         <div class="invalid-feedback">Please enter your skype id.</div><br>
                         <label for="image" class="form-label">Upload your picture</label><br>
                         <input type="file" name="Image" class="form-control formData" accept="image/*" id="fileInput" required>
                         <div class="invalid-feedback">Please upload your image.</div><br><br>
-                        <button class="btn btn-primary" type="submit" id = "submit" value="Submit" onclick="saveItem()">Submit</button>
-                        <button type = "button" class="btn btn-secondary" data-bs-dismiss = "modal">Cancel</button>
+                        <button id = "submit" type="submit" class="btn btn-primary" value="Submit" onclick="saveItem()">Submit</button>
+                        <button id = "cancel" type = "reset" class="btn btn-secondary" data-bs-dismiss = "modal" value = "reset">Cancel</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
     <div id="profileDetails"></div>
+
+    <div class="modal" id = "employeeDetails">
+        <div class = "modal-dialog profilePopup">
+            <div class = "profilePopupColor modal-content">
+                <div class = "modal-body" id = "profilePopupEmpty">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <img id = "employeeImage" src="" alt="employeePic" class = "employeePic">
+                    <h1 id = "namePreferred"></h1>
+                    <p class="profileDescription" id = "nameFirst"></p>
+                    <p class="profileDescription" id = "nameLast"></p>
+                    <p class="profileDescription" id = "emailId"></p>
+                    <p class="profileDescription" id = "job"></p>
+                    <p class="profileDescription" id = "off"></p>
+                    <p class="profileDescription" id = "dept"></p>
+                    <p class="profileDescription" id = "cell"></p>
+                    <p class="profileDescription" id = "idSkype"></p>
+                    <button class="btn btn-primary editButton" type="button" id = "edit" value="Edit" data-bs-toggle = "modal" data-bs-target = "#formModal">Update</button>
+                    <button class="btn btn-secondary deleteButton" id = "delete" value="Delete" data-bs-dismiss="modal">Delete</button>
+                </div>        
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript Bundle with Popper -->
     <script src = "index.js"></script>
