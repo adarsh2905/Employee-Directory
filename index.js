@@ -1,17 +1,22 @@
 createButton();
+let newId = 0;
+initializeData();
+let emplist = getEmployees();
+renderEmployees(emplist);
+countOfEmployees(emplist);
+
 //function to create buttons 
 function createButton() {
     var btns = "";
     btns += `<button class = "myBtn" onclick = "getEmployees()"><i class = "fa fa-user"></i></button>`
     for(let i = 65; i < 91; i++){
         var letter = String.fromCharCode(i);
-        btns += `<button class = "myBtn pointerStyle" id = "alphaButton" onclick = "alphaFilter('${letter}')">${letter}</button>`
+        btns += `<button class = "myBtn pointerStyle" id = "alphaButton" onclick = "searchFilter('${letter}')">${letter}</button>`
     }
     document.getElementById("alphaSearch").innerHTML=btns;
 }
 
-let newId = 0;
-initializeData();
+//function to create sample employees
 function initializeData() {
     let currentId = 0;
     if(localStorage.length === 0){
@@ -71,7 +76,6 @@ function initializeData() {
 }
 
 //function to save data to local storage
-
 function saveItem() {
     let employee= new Map();
     employee = {
@@ -87,7 +91,7 @@ function saveItem() {
         Image: "",
         Id: ""
     };    
-    
+        
     var inputs = document.getElementsByClassName("formData");
     employee.FirstName = inputs[0].value;
     employee.LastName = inputs[1].value;
@@ -119,7 +123,6 @@ function saveItem() {
 }
 
 //function to render employees in required template
-
 function renderEmployees(listOfEmployees) {
     var employeeHtmlTemplate = "";
     for(let i = 0; i < listOfEmployees.length; i++){
@@ -142,7 +145,6 @@ function renderEmployees(listOfEmployees) {
 
 
 //function to get employee list from local storage
-
 function getEmployees() {
     let allEmployeeList = [];
     for(let i = 1; i <= localStorage.getItem("latestId"); i++){
@@ -155,76 +157,28 @@ function getEmployees() {
     return allEmployeeList;
 }
 
-let emplist = getEmployees();
-renderEmployees(emplist);
-
-
 //function to search employee using alphabet
-
-function alphaFilter(letter) {
+function searchFilter(letter) {
     var employeeList = getEmployees();
     var filteredEmployeeList = [];
-    for(let i = 0; i < employeeList.length; i++){
-        if(employeeList[i].PreferredName.toLowerCase().startsWith(letter.toLowerCase())){
-            filteredEmployeeList.push(employeeList[i]);
-        }
-    }
-    renderEmployees(filteredEmployeeList);
-}
-
-
-//function to search employee using search bar
-
-function searchByFilterList() {
-    var searchInput = document.getElementById('search-input').value;
     const filterValue = document.querySelector('#filter').value;
-    const filter = searchInput.toLowerCase();
-    const listItems = getEmployees();
-    var employeeListByFilter = [];
-    listItems.forEach((item) =>{
-        if(filterValue === 'FirstName'){
-            let text = item.FirstName.toLowerCase();
-            if(text.includes(filter)){
-                employeeListByFilter.push(item);
-            }
-        } else if(filterValue === 'LastName'){
-            let text = item.LastName.toLowerCase();
-            if(text.includes(filter)){
-                employeeListByFilter.push(item);
-            }
-        } else if(filterValue === 'PreferredName'){
-            let text = item.PreferredName.toLowerCase();
-            if(text.includes(filter)){
-                employeeListByFilter.push(item);
-            }
-        } else if(filterValue === 'Email'){
-            let text = item.Email.toLowerCase();
-            if(text.includes(filter)){
-                employeeListByFilter.push(item);
-            }
-        } else if(filterValue === 'JobTitle'){
-            let text = item.JobTitle.toLowerCase();
-            if(text.includes(filter)){
-                employeeListByFilter.push(item);
-            }
-        } else if(filterValue === 'Office'){
-            let text = item.Office.toLowerCase();
-            if(text.includes(filter)){
-                employeeListByFilter.push(item);
-            }
-        } else if(filterValue === 'Department'){
-            let text = item.Department.toLowerCase();
-            if(text.includes(filter)){
-                employeeListByFilter.push(item);
-            }
+    let text = letter.toLowerCase();
+    employeeList.forEach((item) =>{
+        if(item[filterValue].toLowerCase().includes(text)){
+            filteredEmployeeList.push(item);
         }
-        renderEmployees(employeeListByFilter);    
-    }
-    );
+        renderEmployees(filteredEmployeeList);
+    });
 }
 
-//function to search employee using search bar
+//function call to search employee using search bar
+var inputText = document.getElementById('search-input');
+inputText.onkeyup = function(ev) {
+    var searchInput = inputText.value;
+    searchFilter(searchInput);
+}
 
+//function to search employee using side bar
 function searchBySideBar(sideBarHeading, sideBarValue) {
     const listItems = getEmployees();
     var employeeListBySideBarFilter = [];
@@ -247,39 +201,37 @@ function searchBySideBar(sideBarHeading, sideBarValue) {
         }
         renderEmployees(employeeListBySideBarFilter); 
         event.preventDefault();   
-    }
-    );
+    });
 }
 
 //function to display employee details when clicking on employee name
-
 function getEmployeeById(id) {
     let emp = JSON.parse(localStorage.getItem(id));
     displayEmployeeDetails(emp);
 }
 
-
+// function to render employee popup profile 
 function displayEmployeeDetails(emp) {
     var image = document.getElementById("employeeImage");
     image.src = emp.Image;
     var preferredName = document.getElementById("namePreferred");
     preferredName.innerHTML = emp.PreferredName;
     var firstName = document.getElementById("nameFirst");
-    firstName.innerHTML = `<strong>First Name : </strong>` + emp.FirstName;
+    firstName.innerHTML = `<strong>First Name : </strong> ${emp.FirstName}`;
     var lastName = document.getElementById("nameLast");
-    lastName.innerHTML = `<strong>Last Name : </strong>` + emp.LastName;
+    lastName.innerHTML = `<strong>Last Name : </strong> ${emp.LastName}`;
     var email = document.getElementById("emailId");
-    email.innerHTML = `<strong>Email : </strong>` + emp.Email;
+    email.innerHTML = `<strong>Email : </strong> ${emp.Email}`;
     var jobTitle = document.getElementById("job");
-    jobTitle.innerHTML = `<strong>Job Title : </strong>` + emp.JobTitle;
+    jobTitle.innerHTML = `<strong>Job Title : </strong> ${emp.JobTitle}`;
     var office = document.getElementById("off");
-    office.innerHTML = `<strong>Office : </strong>` + emp.Office;
+    office.innerHTML = `<strong>Office : </strong> ${emp.Office}`;
     var department = document.getElementById("dept");
-    department.innerHTML = `<strong>Department : </strong>` + emp.Department;
+    department.innerHTML = `<strong>Department : </strong> ${emp.Department}`;
     var mobile = document.getElementById("cell");
-    mobile.innerHTML = `<strong>Phone Number : </strong>` + emp.PhoneNumber;
+    mobile.innerHTML = `<strong>Phone Number : </strong> ${emp.PhoneNumber}`;
     var skypeId = document.getElementById("idSkype");
-    skypeId.innerHTML = `<strong>Skype ID : </strong>` + emp.SkypeId;
+    skypeId.innerHTML = `<strong>Skype ID : </strong> ${emp.SkypeId}`;
     document.getElementById("edit").onclick = function(ev){
         updateEmployee(emp);
     }
@@ -288,7 +240,7 @@ function displayEmployeeDetails(emp) {
     }
 }
 
-
+// function to get popup form to update employee details
 function updateEmployee(emp) {
     document.getElementById("formHeading").innerHTML = "Update Employee";
     document.getElementById("fname").value = emp.FirstName;
@@ -304,9 +256,9 @@ function updateEmployee(emp) {
     updateButton.onclick = function(ev){
         setUpdatedEmployeeData(emp.Id);
     }
-
 }
 
+//function to store updated employee data
 function setUpdatedEmployeeData(id){
     let employee= new Map();
     employee = {
@@ -350,107 +302,67 @@ function setUpdatedEmployeeData(id){
     reader.readAsDataURL(file);
 }
 
-
-countOfEmployees(emplist);
+// function to create sidebar filter
 function countOfEmployees(emplist) {
-    var deptIT = 0, deptHR = 0, deptMD = 0, deptSales = 0, deptUX =0;
-    var offIndia = 0, offSeattle = 0;
-    var jobLeadEngineer = 0, jobPracticeHead = 0, jobRecruitExpert = 0, jobBIDeveloper = 0, jobAnlayst = 0; 
-    var jobOpsManager = 0, jobProductManager = 0, jobNetworkEngineer = 0, jobTalentMagnet = 0, jobSoftwareEngineer = 0, jobUXDesigner = 0; 
-    
-    for(let i = 0; i < emplist.length; i++){
+    var keys = ['IT', 'HR', 'MD',  'UX', 'Sales', 'India', 'Seattle', 'Practice Head', 
+    'Development Lead - Dot Net', 'Recruiting Expert', 'BI Developer', 'Analyst', 'Operations Manager', 
+    'Product Manager', 'Network Engineer', 'Talent Magnet Jr.', 'Software Engineer', 'UX Designer'];
+
+    var map = new Map();
+    for(var i = 0; i < keys.length; i++){
+        map.set(keys[i], 0);
+    }
+
+    for(var i = 0; i < emplist.length; i++){
         var empDept = emplist[i].Department;
         var empOff = emplist[i].Office;
         var empJob = emplist[i].JobTitle;
 
-        if (empDept === "IT"){
-            deptIT++;
+        if(map.has(empDept)){
+            map.set(empDept, map.get(empDept) + 1);
         }
-        if (empDept === "HR"){
-            deptHR++;
+        if(map.has(empOff)){
+            map.set(empOff, map.get(empOff) + 1);
         }
-        if (empDept === "MD"){
-            deptMD++;
-        }
-        if (empDept === "Sales"){
-            deptSales++;
-        }
-        if (empDept === "UX"){
-            deptUX++;
-        }
-
-        if (empOff === "India"){
-            offIndia++;
-        }
-        if (empOff === "Seattle"){
-            offSeattle++;
-        }
-
-        if (empJob === "Development Lead - Dot Net"){
-            jobLeadEngineer++;
-        }
-        if (empJob === "Practice Head"){
-            jobPracticeHead++;
-        }
-        if (empJob === "Recruiting Expert"){
-            jobRecruitExpert++;
-        }
-        if (empJob === "BI Developer"){
-            jobBIDeveloper++;
-        }
-        if (empJob === "Analyst"){
-            jobAnlayst++;
-        }
-        if (empJob === "Operations Manager"){
-            jobOpsManager++;
-        }
-        if (empJob === "Product Manager"){
-            jobProductManager++;
-        }
-        if (empJob === "Network Engineer"){
-            jobNetworkEngineer++;
-        }
-        if (empJob === "Talent Magnet Jr."){
-            jobTalentMagnet++;
-        }
-        if (empJob === "Software Engineer"){
-            jobSoftwareEngineer++;
-        }
-        if (empJob === "UX Designer"){
-            jobUXDesigner++;
+        if(map.has(empJob)){
+            map.set(empJob, map.get(empJob) + 1);
         }
     }
 
+    var deptCount = ['IT', 'Human Resources', 'MD', 'UX', 'Sales'];
+    var officeCount = ['India', 'Seattle'];
+    var jobTitleCount = [ 'SharePoint Practice Head', '.NET Development Lead', 'Recruiting Expert',
+    'BI Developer', 'Business Analyst', 'Operations Manager', 'Product Manager', 'Network Engineer',
+    'Talent Magnet Jr.', 'Software Engineer', 'UX Designer'];
+
+    var deptLength = deptCount.length;
+    var officeLength = officeCount.length;
+    var jobTitleLength = jobTitleCount.length;
     var navBar = "";
-    navBar = `<nav>
-        <h4>Departments</h4>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Department', 'IT')">IT (${deptIT})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Department', 'HR')">Human Resources (${deptHR})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Department', 'MD')">MD (${deptMD})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Department', 'UX')">UX (${deptUX})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Department', 'Sales')">Sales (${deptSales})</a></li>
-        <h4>Offices</h4>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Office', 'India')">India (${offIndia})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Office', 'Seattle')">Seattle(${offSeattle})</a></li>
-        <h4>Job Titles</h4>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'Practice Head')">SharePoint Pratice Head (${jobPracticeHead})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'Development Lead - Dot Net')">.NET Development Lead (${jobLeadEngineer})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'Recruiting Expert')">Recruiting Expert (${jobRecruitExpert})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'BI Developer')">BI Developer (${jobBIDeveloper})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'Analyst')">Business Analyst (${jobAnlayst})</a></li>
-            <div id = "displayHiddenList">
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'Operations Manager')">Operations manager (${jobOpsManager})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'Product Manager')">Product Manager (${jobProductManager})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'Network Engineer')">Network Engineer (${jobNetworkEngineer})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'Talent Magnet Jr.')">Talent Magnet Jr. (${jobTalentMagnet})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'Software Engineer')">Software Engineer (${jobSoftwareEngineer})</a></li>
-            <li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', 'UX Designer')">UI Designer (${jobUXDesigner})</a></li>
-            </div>
+    navBar += `<nav>
+    <h4>Departments</h4>`
+    for(var i = 0; i < deptLength; i++){
+        navBar += `<li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Department', '${keys[i]}')"> ${deptCount[i]} (${map.get(keys[i])})</a></li>`
+    }
+    navBar += `<h4>Offices</h4>`
+    for(var i = 0; i < officeLength; i++){
+        navBar += `<li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Office', '${keys[i+deptLength]}')"> ${officeCount[i]} (${map.get(keys[i+deptLength])})</a></li>`
+    }
+    navBar += `<h4>Job Titles</h4>`
+    for(var i = 0; i < 5; i++){
+        navBar += `<li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', '${keys[i+deptLength+officeLength]}')"> ${jobTitleCount[i]} (${map.get(keys[i+deptLength+officeLength])})</a></li>`
+    }
+    navBar += `<div id = "displayHiddenList">`
+    for(var i = 5; i < jobTitleLength; i++){
+        navBar += `<li><a href="" class = "pointerStyle textColor" onclick = "searchBySideBar('Job Title', '${keys[i+deptLength+officeLength]}')"> ${jobTitleCount[i]} (${map.get(keys[i+deptLength+officeLength])})</a></li>`
+    }
+    navBar += `</div>
             <button id = "collapseButton" type = "button" onclick = "changeName()">view more</button>
     </nav>`
     document.getElementById("navbar").innerHTML = navBar;
 }
 
+//function to get toggle in side bar 
 function changeName(){
     var buttonValue = document.getElementById("collapseButton").innerHTML;
     var x = document.getElementById("displayHiddenList");
@@ -464,11 +376,13 @@ function changeName(){
     }
 }
 
+//function to set default values on click of clear button
 function clearInput() {
     getEmployees();
     document.querySelector('#filter').value = 'FirstName';
 }
 
+// function to delete an employee
 function deleteEmployee(id){
     localStorage.removeItem(parseInt(id));
     window.location.reload();
