@@ -1,80 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Directory</title>
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
     <!-- JS-->
     <script src="https://kit.fontawesome.com/fbe5281d41.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <header class>
-        <div class = "row justify-content-between">
-            <div class = "col-6 d-flex">
-                <div><img src="images/saketa-logo.png" alt="Saketa Logo" class = "logo"></div>
+        <div class="row justify-content-between">
+            <div class="col-6 d-flex">
+                <div><img src="images/saketa-logo.png" alt="Saketa Logo" class="logo"></div>
                 <div>
-                    <h1 class = "logoHeadingFont">Employee Directory</h1>
+                    <h1 class="logoHeadingFont">Employee Directory</h1>
                     <p style="font-size: 20px;">The Ultimate People Directory Experience</p>
                 </div>
             </div>
-            <div class = "col-6 logo-heading d-flex">
-                <h1 class = "header-layout"><span class = "logoHeadingFont">Welcome,</span> Adarsh Kumar</h1>
+            <div class="col-6 logo-heading d-flex">
+                <h1 class="header-layout"><span class="logoHeadingFont">Welcome,</span> Adarsh Kumar</h1>
                 <img src="images/myPic.jpg" alt="My pic" class="bioPic-header">
             </div>
         </div>
     </header>
     <hr>
     <main>
-        <div class = "d-flex">
-            <div class = "wrapper">
-                <nav id = "navbar"></nav>
+        <div class="d-flex">
+            <div class="wrapper">
+                <nav id="navbar"></nav>
             </div>
-            <div class = "mainContent">
-                <div class = "searchBar">
-                    <div id = "alphaSearch"></div>
+            <div class="mainContent">
+                <div class="searchBar">
+                    <div id="alphaSearch"></div>
                     <div class="d-flex">
                         <div>
                             <form>
                                 <label for="search">Search</label>
-                                <input type="text" name = "search" placeholder = "&#x1F50D  Enter any keyword" id = "search-input" class = "fontAwesome">
-                                <input type = "reset" value = "Clear" class = "clearButton" onclick="clearInput()">
+                                <input type="text" name="search" placeholder="&#x1F50D  Enter any keyword"
+                                    id="search-input" class="fontAwesome">
+                                <input type="reset" value="Clear" class="clearButton" onclick="clearInput()">
                             </form>
                         </div>
                         <div>
                             <label for="filter">Filter by</label>
-                            <select name="filterBy" id="filter" class = "custom-select selectFilter">
-                                <option value="FirstName">First Name</option>
-                                <option value="LastName">Last Name</option>
-                                <option value="PreferredName">Preferred Name</option>
-                                <option value="Email">Email</option>
-                                <option value="JobTitle">Job Title</option>
-                                <option value="Office">Office</option>
-                                <option value="Department">Department</option>
+                            <select name="filterBy" id="filter" class="custom-select selectFilter">
                             </select>
-                            <button type="button" id = "addEmployee" class = "btn btn-primary float-right" data-bs-toggle = "modal" data-bs-target = "#formModal">Add Employee</button>
+                            <button type="button" id="addEmployee" class="btn btn-primary float-right"
+                                data-bs-toggle="modal" data-bs-target="#formModal">Add Employee</button>
                         </div>
                     </div>
                 </div>
-                <div class = "note">Note: <span class="textColor">Please use the advance filter options to refine your results.</span></div>
-                <div class = "container vertical-scrollable profileListDiv">
-                    <div class="row" id="displayFilteredList" ></div>
+                <div class="note">Note: <span class="textColor">Please use the advance filter options to refine your
+                        results.</span></div>
+                <div class="container profileListDiv">
+                    <div class="row" id="displayFilteredList"></div>
                 </div>
             </div>
         </div>
     </main>
 
-    <div id = "formModal" class = "modal">
-        <div class = "formPopup modal-dialog">
-            <div class = "modal-content">
-                <div class = "modal-header">
+    <div id="formModal" class="modal">
+        <div class="formPopup modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
                     <h1 class="modal-title" id="formHeading">Add New Employee</h1>
                 </div>
-                <div class = "modal-body">
-                    <form class = "was-validated">
+                <div class="modal-body">
+                    <form class="was-validated">
                         <label for="fname" class="form-label">First Name:</label><br>
                         <input type="text" id="fname" class="form-control formData" name="fname" required>
                         <div class="invalid-feedback">Please enter your first name.</div><br>
@@ -88,42 +87,28 @@
                         <div class="invalid-feedback">Please enter your email.</div><br>
                         <label for="jobTitle" class="form-label">Job Title</label><br>
                         <select name="jobTitle" class="form-select formData" id="jobTitle" required>
-                            <option value="Development Lead - Dot Net">.NET Development Lead</option>
-                            <option value="Practice Head">SharePoint Practice Head</option>
-                            <option value="Recruiting Expert">Recruiting Expert</option>
-                            <option value="BI Developer">BI Developer</option>
-                            <option value="Analyst">Business Analyst</option>
-                            <option value="Operations Manager">Operations Manager</option>
-                            <option value="Product Manager">Product Manager</option>
-                            <option value="Network Engineer">Network Engineer</option>
-                            <option value="Talent Magnet Jr.">Talent Magnet Jr.</option>
-                            <option value="Software Engineer">Software Engineer</option>
-                            <option value="UI Designer">UI Designer</option>
                         </select><br>
                         <label for="office" class="form-label">Office</label><br>
                         <select name="office" class="form-select formData" id="office" required>
-                            <option value="India">India</option>
-                            <option value="Seattle">Seattle</option>
                         </select><br>
                         <label for="department" class="form-label">Department</label><br>
                         <select name="department" class="form-select formData" id="department" required>
-                            <option value="IT">IT</option>
-                            <option value="HR">Human Resources</option>
-                            <option value="MD">MD</option>
-                            <option value="Sales">Sales</option>
-                            <option value="UX">UX</option>
                         </select><br>
                         <label for="telephone" class="form-label">Phone Number</label><br>
-                        <input type="tel" id = "telephone" class="form-control formData" name="telephone" pattern="[0-9]{10}" maxlength="10"  title="Ten digits code" required/>
+                        <input type="tel" id="telephone" class="form-control formData" name="telephone"
+                            pattern="[0-9]{10}" maxlength="10" title="Ten digits code" required />
                         <div class="invalid-feedback">Please enter your 10 digit mobile number.</div><br>
                         <label for="skype" class="form-label">Skype ID</label><br>
                         <input type="number" id="skype" class="form-control formData" name="skypeId" required>
                         <div class="invalid-feedback">Please enter your skype id.</div><br>
                         <label for="image" class="form-label">Upload your picture</label><br>
-                        <input type="file" name="Image" class="form-control formData" accept="image/*" id="fileInput" required>
+                        <input type="file" name="Image" class="form-control formData" accept="image/*" id="fileInput"
+                            required>
                         <div class="invalid-feedback">Please upload your image.</div><br><br>
-                        <button id = "submit" type="submit" class="btn btn-primary" value="Submit" onclick="saveItem()">Submit</button>
-                        <button id = "cancel" type = "reset" class="btn btn-secondary" data-bs-dismiss = "modal" value = "reset">Cancel</button>
+                        <button id="submit" type="submit" class="btn btn-primary" value="Submit"
+                            onclick="saveItem()">Submit</button>
+                        <button id="cancel" type="reset" class="btn btn-secondary" data-bs-dismiss="modal"
+                            value="reset">Cancel</button>
                     </form>
                 </div>
             </div>
@@ -131,30 +116,38 @@
     </div>
     <div id="profileDetails"></div>
 
-    <div class="modal" id = "employeeDetails">
-        <div class = "modal-dialog profilePopup">
-            <div class = "profilePopupColor modal-content">
-                <div class = "modal-body" id = "profilePopupEmpty">
+    <div class="modal" id="employeeDetails">
+        <div class="modal-dialog profilePopup">
+            <div class="profilePopupColor modal-content">
+                <div class="modal-body" id="profilePopupEmpty">
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    <img id = "employeeImage" src="" alt="employeePic" class = "employeePic">
-                    <h1 id = "namePreferred"></h1>
-                    <p class="profileDescription" id = "nameFirst"></p>
-                    <p class="profileDescription" id = "nameLast"></p>
-                    <p class="profileDescription" id = "emailId"></p>
-                    <p class="profileDescription" id = "job"></p>
-                    <p class="profileDescription" id = "off"></p>
-                    <p class="profileDescription" id = "dept"></p>
-                    <p class="profileDescription" id = "cell"></p>
-                    <p class="profileDescription" id = "idSkype"></p>
-                    <button class="btn btn-primary editButton" type="button" id = "edit" value="Edit" data-bs-toggle = "modal" data-bs-target = "#formModal">Update</button>
-                    <button class="btn btn-secondary deleteButton" id = "delete" value="Delete" data-bs-dismiss="modal">Delete</button>
-                </div>        
+                    <img id="employeeImage" src="" alt="employeePic" class="employeePic">
+                    <h1 id="namePreferred"></h1>
+                    <p class="profileDescription" id="nameFirst"></p>
+                    <p class="profileDescription" id="nameLast"></p>
+                    <p class="profileDescription" id="emailId"></p>
+                    <p class="profileDescription" id="job"></p>
+                    <p class="profileDescription" id="off"></p>
+                    <p class="profileDescription" id="dept"></p>
+                    <p class="profileDescription" id="cell"></p>
+                    <p class="profileDescription" id="idSkype"></p>
+                    <button class="btn btn-primary editButton" type="button" id="edit" value="Edit"
+                        data-bs-toggle="modal" data-bs-target="#formModal">Update</button>
+                    <button class="btn btn-secondary deleteButton" id="delete" value="Delete"
+                        data-bs-dismiss="modal">Delete</button>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- JavaScript Bundle with Popper -->
-    <script src = "index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script></body>
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>

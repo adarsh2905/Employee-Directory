@@ -125,7 +125,9 @@ label {
     padding: 5px 20px;
     border: 1px solid #E5E5E5;
     min-width: 1460px;
-    min-height: 400px;
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .myBtn {
@@ -180,7 +182,7 @@ label {
     min-height: 120px;
     background-color: #E9E8E8;
     margin: 10px 5px;
-    max-width: 350px;
+    max-width: 340px;
     border-radius: 5px;
 }
 
