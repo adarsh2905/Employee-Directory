@@ -227,30 +227,30 @@ h5 {
 
 a:hover {
     text-decoration: underline;
-  }
+}
 
- .textColor {
-    color: #98A19F;
- }
+.textColor {
+    color: #98A19F; 
+}
 
-  .employeePic {
+.employeePic {
     min-width: 360px;
     max-width: 360px;
     height: 360px;
-  }
+}
 
-  h1 {
+h1 {
     text-align: center;
     padding: 10px 0 20px 0;
     font-size: 44px;
-  }
+}
 
-  .profileDescription {
+.profileDescription {
     font-size: 22px;
     line-height: 16px;
-  }
+}
 
- .editButton {
+.editButton {
     margin-top: 10px;
     color : white;
     background-color: #00B1FC;
@@ -258,9 +258,9 @@ a:hover {
     font-size: 20px;
     min-width: 80px;
     margin-left: 70px;
-  }
+}
 
- .deleteButton {
+.deleteButton {
     margin-top: 10px;
     color : white;
     background-color: #EB118E;
@@ -268,9 +268,9 @@ a:hover {
     font-size: 20px;
     min-width: 80px;
     margin-left: 30px;
- }
+}
 
- #collapseButton {
+#collapseButton {
     border: none;
     outline: none;
     background-color: white;
@@ -280,21 +280,21 @@ a:hover {
     color: #00B0FD;
     margin-left: 15px;
     cursor: default;
- }
+}
 
- .active, #collapseButton:hover {
+.active, #collapseButton:hover {
     text-decoration: underline;
-  }
+}
 
- #displayHiddenList {
+#displayHiddenList {
     overflow: hidden;
     display: none;
- }
+}
 
- .formPopup {
+.formPopup {
     min-width: 50%;
- }
+}
 
- .btn-close {
+.btn-close {
     float: right;
- }
+}

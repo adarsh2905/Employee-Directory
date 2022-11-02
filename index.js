@@ -9,7 +9,7 @@ const jobTitleName = ['Practice Head', 'Development Lead - Dot Net', 'Recruiting
     'Business Analyst', 'Operations Manager', 'Product Manager', 'Network Engineer', 'Talent Magnet Jr.',
     'Software Engineer', 'UI Designer'];
 const filterValue = ['FirstName', 'LastName', 'PreferredName', 'Email', 'JobTitle', 'Office', 'Department'];
-const filterName = ['First Name', 'Last Name', 'Preferred Name', 'Email', 'Job Title', 'Office', 'Department']
+const filterName = ['First Name', 'Last Name', 'Preferred Name', 'Email', 'Job Title', 'Office', 'Department'];
 createButton();
 let newId = 0;
 initializeData();
@@ -296,19 +296,6 @@ function updateEmployee(emp) {
 //function to store updated employee data
 function setUpdatedEmployeeData(id) {
     let employee = new Map();
-    employee = {
-        FirstName: "",
-        LastName: "",
-        PreferredName: "",
-        Email: "",
-        JobTitle: "",
-        Office: "",
-        Department: "",
-        PhoneNumber: "",
-        SkypeId: "",
-        Image: "",
-        Id: ""
-    };
 
     let inputs = document.getElementsByClassName("formData");
     employee.FirstName = inputs[0].value;
